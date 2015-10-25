@@ -4,10 +4,11 @@ A slider for animated gifs that pulls gif files from a directory and displays th
 [View Demo](http://davidra.co/full-screen-gif-slider/)
 
 ## How it works
-- 'fileNamesFromFolder.php' grabs image filenames from a directory, fills an array, shuffles it, and returns an array string of the filenames
-- 'full-screen-gif-slider.js' loads the filenames with ajax and creates image tag elements with src="gif/filename.gif"
+- *fileNamesFromFolder.php* grabs image filenames from a directory, fills an array, shuffles it, and returns an array string of the filenames
+- *full-screen-gif-slider.js* loads the filenames with ajax and creates image tag elements with src="gif/filename.gif"
 - Gif files are large, so in order to keep the gifs animating smoothly, loads 3 gifs initially to the DOM...
 - 1 gif gets displayed on the viewport, and the other 2 are hidden offscreen to the right, so that by the time they're displayed, they're fully loaded and looping
+- CSS styles stretch image widths and heights to fit the viewport
 - Sliding the gifs works with the right arrow keyboard key ( => ), clicking anywhere on screen, or swiping left on mobile
 - After every slide, left-most gif is removed from the DOM and another is added on the far right
 
@@ -21,4 +22,5 @@ A slider for animated gifs that pulls gif files from a directory and displays th
 - Refactor to vanilla JavaScript
 - Add Node.js, Python and Ruby options to grab filenames from folder
 - Add customization options for directory name, number of gifs to preload, welcome screen text, etc.
-- Add a mobile option to choose portrait or landscape mode, one to pull from a folder of vertical gifs and the other to pull from a folder of horizontal ones
+- Add mobile option to choose portrait or landscape mode, one to pull from a folder of vertical gifs and the other to pull from a folder of horizontal ones
+- Maybe add slideshow option
