@@ -65,7 +65,7 @@
 
       function removeFirstChild(element) {
         $(element.find('img:first')[0]).animate({
-          'margin-left': -(winWidth)}, 500, 'linear', function() {
+          'margin-left': -(winWidth)}, 500, 'swing', function() {
           $(this).remove();
         })
       }
