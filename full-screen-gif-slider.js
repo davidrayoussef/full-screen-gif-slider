@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
 'use strict';
 
   $(function() {
@@ -7,18 +7,18 @@
     var wrapper = $('#wrapper');
     var container = $('#images');
     var url = 'fileNamesFromFolder.php';
+    var gifFolder = 'gifs';
     var fileNamesText;
     var fileNamesArray;
     var winWidth;
     var winHeight;
 
     container.load(url, function() {
-      fileNamesText = container.text();
-      fileNamesText = JSON.parse("[" + fileNamesText + "]");
+      fileNamesText = JSON.parse("[" + container.text() + "]");
       fileNamesArray = fileNamesText.reduce(function(a,b) {
         return a.concat(b);
       }).map(function(v) {
-        return 'gifs/' + v;
+        return gifFolder + '/' + v;
       });
 
       var viewsLeft = fileNamesArray.length;
@@ -40,21 +40,22 @@
 
       function slide() {
         viewsLeft--;
-        if(viewsLeft > 0) {
-          popAddImage(fileNamesArray);
+        if (viewsLeft > 0) {
+          popThenAddImage(fileNamesArray);
           removeFirstChild(slider);
         }
         else alert('Sorry no more gifs');
       }
 
-      // add 3 initial images. gifs are large so they need to be preloaded. one on main viewport, two hidden offscreen to the right.
+      // Add 3 initial images. Gifs are large so they need to be preloaded.
+      // One on main viewport, two hidden offscreen to the right.
       function addThreeImages() {
           for (var i = 0; i < 3; i++) {
-          popAddImage(fileNamesArray);
+          popThenAddImage(fileNamesArray);
         }
       }
 
-      function popAddImage(array) {
+      function popThenAddImage(array) {
         var image = document.createElement('img');
         image.setAttribute('src', array.pop());
         image.setAttribute('width', winWidth);
@@ -89,9 +90,9 @@
       slider.css('width', winWidth * 3);
     };
 
-    window.addEventListener("resize", function() {
+    window.addEventListener('resize', function() {
       setWindowSize();
-      var imagesToResize = document.getElementsByTagName("img");
+      var imagesToResize = document.getElementsByTagName('img');
       Array.apply(null, imagesToResize).map(function(image){
         image.setAttribute('width', winWidth);
         image.setAttribute('height', winHeight);
