@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -109,7 +109,7 @@ $(function() {
 });
 </script>
 
-<script src="full-screen-gif-slider.js"></script>
+<script src="fullScreenGifSlider.js"></script>
 
 </body>
 </html>
