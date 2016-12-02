@@ -3,27 +3,31 @@
 
   $(function() {
 
+    // TODO => Refactor as a vanilla JS plugin with an options object for default variables
     var slider = $('#slider');
     var wrapper = $('#wrapper');
     var container = $('#images');
-    var url = 'fileNamesFromFolder.php';
+    var defaultBackend = 'node'; // optional => 'php'
+    var nodeUrl = 'fileNames.json';
+    var phpUrl = 'fileNamesFromFolder.php';
     var gifFolder = 'gifs';
-    var fileNamesText;
+    // Gifs are large so they need to be preloaded; use amount between 3 and 5
+    var numberOfGifsToPreload = 5;
     var fileNamesArray;
     var winWidth;
     var winHeight;
+    var viewsLeft;
 
-    container.load(url, function() {
-      fileNamesText = JSON.parse("[" + container.text() + "]");
-      fileNamesArray = fileNamesText.reduce(function(a,b) {
-        return a.concat(b);
-      }).map(function(v) {
-        return gifFolder + '/' + v;
+    $.getJSON('fileNames.json', function(data) {
+      fileNamesArray = data.map(function(fileName) {
+        return gifFolder + '/' + fileName;
       });
 
-      var viewsLeft = fileNamesArray.length;
+      shuffle(fileNamesArray);
+      
+      viewsLeft = fileNamesArray.length;
 
-      addThreeImages();
+      preloadImages();
 
       slider.on('click', slide);
 
@@ -49,8 +53,8 @@
 
       // Add 3 initial images. Gifs are large so they need to be preloaded.
       // One on main viewport, two hidden offscreen to the right.
-      function addThreeImages() {
-          for (var i = 0; i < 3; i++) {
+      function preloadImages() {
+        for (var i = 0; i < numberOfGifsToPreload; i++) {
           popThenAddImage(fileNamesArray);
         }
       }
