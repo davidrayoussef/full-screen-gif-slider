@@ -1,0 +1,14 @@
+{
+  "name": "full-screen-gif-slider",
+  "version": "1.0.0",
+  "description": "A slider for animated gifs that stretches full screen.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "David Ra Youssef <davidradeveloper@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.14.0"
+  }
+}
