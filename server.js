@@ -4,8 +4,6 @@ const app = express();
 const port = 3000;
 const gifFolder = './public/gifs';
 
-let fileNames = [];
-
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
@@ -13,11 +11,7 @@ app.get('/', function(req, res) {
 });
 
 fs.readdir(gifFolder, (err, files) => {
-  files.forEach(file => {
-    fileNames.push(files);
-  });
-
-  fs.writeFileSync('public/fileNames.json', JSON.stringify(fileNames));
+  fs.writeFileSync('public/fileNames.json', JSON.stringify(files));
 });
 
 app.listen(port, (err) => {
