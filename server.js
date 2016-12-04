@@ -11,6 +11,10 @@ app.get('/', function(req, res) {
 });
 
 fs.readdir(gifFolder, (err, files) => {
+  if (err) {
+    console.log("Can't find gif directory. Make sure you have a folder of gifs in this location => '/public/gifs' ... Then restart server.");
+  }
+  
   fs.writeFileSync('public/fileNames.json', JSON.stringify(files));
 });
 
