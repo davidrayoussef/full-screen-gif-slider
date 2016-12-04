@@ -13,8 +13,8 @@ Add a folder of gifs within the public folder (make sure the folder is called "g
 $ cd full-screen-gif-slider
 $ npm install
 $ npm start
-$ Point your browser to http://localhost:3000/
 ```
+Point your browser to http://localhost:3000/
 - For best results...
   * only use horizontal, landscape images, since the images stretch to fit the screen. Vertical images will get distorted.
   * try to keep the filesizes under 1 meg, so that they have time to load and animate
