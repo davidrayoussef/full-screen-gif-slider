@@ -4,43 +4,41 @@
   $(function() {
 
     // TODO => Refactor as a vanilla JS plugin with an options object for default variables
-    var slider = $('#slider');
     var wrapper = $('#wrapper');
-    var container = $('#images');
+    var slider = $('#slider');
     var defaultBackend = 'node'; // optional => 'php'
-    var nodeUrl = 'fileNames.json';
-    var phpUrl = 'fileNamesFromFolder.php';
+    var fileNames = 'fileNames.json';
     var gifFolder = 'gifs';
     // Gifs are large so they need to be preloaded; use amount between 3 and 5
-    var numberOfGifsToPreload = 5;
+    var numberOfGifsToPreload = 3;
     var fileNamesArray;
     var winWidth;
     var winHeight;
     var viewsLeft;
 
-    $.getJSON('fileNames.json', function(data) {
+    $.getJSON(fileNames, function(data) {
       fileNamesArray = data.map(function(fileName) {
         return gifFolder + '/' + fileName;
       });
 
       shuffle(fileNamesArray);
-      
+
       viewsLeft = fileNamesArray.length;
 
       preloadImages();
 
-      slider.on('click', slide);
+      slider.on('click', debounce(slide, 400, true));
 
       // add swipe functionality for mobile
       slider.on('swipeleft', slide);
 
       // add keyboard navigation
-      $(document).keydown(function(e) {
+      $(document).on('keydown', debounce(function(e) {
         if (e.keyCode == 39) { // 39 == right arrow keyboard key
           slide();
           return false;
         }
-      });
+      }, 400, true));
 
       function slide() {
         viewsLeft--;
@@ -51,7 +49,7 @@
         else alert('Sorry no more gifs');
       }
 
-      // Add 3 initial images. Gifs are large so they need to be preloaded.
+      // Add 3-5 initial images. Gifs are large so they need to be preloaded.
       // One on main viewport, two hidden offscreen to the right.
       function preloadImages() {
         for (var i = 0; i < numberOfGifsToPreload; i++) {
@@ -68,7 +66,7 @@
       }
 
       function removeFirstChild(element) {
-        $(element.find('img:first')[0]).animate({
+        $(element.children()[0]).animate({
           'margin-left': -(winWidth)}, 500, 'swing', function() {
           $(this).remove();
         })
@@ -83,6 +81,23 @@
         }
         return array;
       }
+
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this;
+          var args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      }
+
     });
 
     function setWindowSize() {
@@ -107,7 +122,7 @@
 
   });
 
-  // remove 'loading' text
+  // remove 'loading' text added by jQuery Mobile
   setTimeout(function() {
     $('body').find('.ui-loader h1').remove();
   }, 1000);
