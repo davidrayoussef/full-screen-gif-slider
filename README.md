@@ -7,8 +7,11 @@ How to use
 ----------
 ```shell
 $ git clone https://github.com/davidrayoussef/full-screen-gif-slider.git
-$ Add a folder of gifs within the public folder (make sure the folder is called "gifs" ... all lowercase, no quotes)
+```
+Add a folder of gifs within the public folder (make sure the folder is called "gifs")
+```shell
 $ cd full-screen-gif-slider
+$ npm install
 $ npm start
 $ Point your browser to http://localhost:3000/
 ```
@@ -16,6 +19,6 @@ $ Point your browser to http://localhost:3000/
   * only use horizontal, landscape images, since the images stretch to fit the screen. Vertical images will get distorted.
   * try to keep the filesizes under 1 meg, so that they have time to load and animate
 
-  TODO
-  ----
-  Refactor to vanilla JavaScript instead of jQuery.
+Todo
+----
+Refactor to vanilla JavaScript instead of jQuery.
