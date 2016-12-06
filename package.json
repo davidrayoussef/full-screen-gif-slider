@@ -7,8 +7,16 @@
     "start": "node server.js"
   },
   "author": "David Ra Youssef <davidradeveloper@gmail.com>",
+  "repository": "davidrayoussef/full-screen-gif-slider",
+  "homepage": "https://github.com/davidrayoussef/full-screen-gif-slider",
   "license": "MIT",
   "devDependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "keywords": [
+    "gif",
+    "animated gifs",
+    "slider",
+    "full-screen"
+  ]
 }
