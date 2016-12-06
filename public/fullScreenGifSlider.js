@@ -6,9 +6,7 @@
     // TODO => Refactor as a vanilla JS plugin with an options object for default variables
     var wrapper = $('#wrapper');
     var slider = $('#slider');
-    var defaultBackend = 'node'; // optional => 'php'
-    var fileNames = 'fileNames.json';
-    var gifFolder = 'gifs';
+    var url = '/gifs';
     // Gifs are large so they need to be preloaded; use amount between 3 and 5
     var numberOfGifsToPreload = 3;
     var fileNamesArray;
@@ -16,9 +14,9 @@
     var winHeight;
     var viewsLeft;
 
-    $.getJSON(fileNames, function(data) {
+    $.getJSON(url, function(data) {
       fileNamesArray = data.map(function(fileName) {
-        return gifFolder + '/' + fileName;
+        return url + '/' + fileName;
       });
 
       shuffle(fileNamesArray);
