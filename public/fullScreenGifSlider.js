@@ -19,9 +19,9 @@
         return url + '/' + fileName;
       });
 
-      shuffle(fileNamesArray);
-
       viewsLeft = fileNamesArray.length;
+
+      shuffle(fileNamesArray);
 
       preloadImages();
 
@@ -57,7 +57,7 @@
 
       function popThenAddImage(array) {
         var image = document.createElement('img');
-        image.setAttribute('src', array.pop());
+        image.setAttribute('src', array.pop() || '');
         image.setAttribute('width', winWidth);
         image.setAttribute('height', winHeight);
         slider.append(image);
